@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from mainapp.models import Product
 
 # Create your views here.
 
@@ -12,6 +13,8 @@ def products(request):
         {'href': 'products_modern', 'name': 'модерн'},
         {'href': 'products_classic', 'name': 'классика'},
     ]
+
+    # product = Product.objects.get(id=pk)
 
     context = {
         'title': title,

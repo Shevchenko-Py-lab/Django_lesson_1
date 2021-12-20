@@ -1,10 +1,11 @@
 from django.shortcuts import render
 
-# Create your views here.
+from mainapp.models import Product
 
 
 def index(request):
-    title = 'главная'
+    title = 'Магазин GeekShop'
+    products = Product.objects.all()[:3]
 
     links_menu = [
         {'href': 'index/', 'name': 'домой'},
@@ -14,6 +15,7 @@ def index(request):
 
     context = {
         'title': title,
+        'products': products,
         'links_menu': links_menu,
     }
     return render(request, 'geekshop/index.html', context=context)
