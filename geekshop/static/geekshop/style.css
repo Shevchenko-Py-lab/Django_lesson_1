@@ -86,10 +86,10 @@ html, body {
 	height: 23px;	
 	background-image: url(img/basket.png);
 	position: absolute;
-	top: 63px;
+	top: 53px;
 	left: 1210px;
+    width: 140px;
 }
-
 .clearfix:after {
 	content: "";
 	display: block;
