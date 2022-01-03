@@ -1,0 +1,9 @@
+.search {
+	display: block;
+	width: 23px;
+	height: 23px;
+	background-image: url(img/search.png);
+	position: absolute;
+	top: 65px;
+	left: 1700px;
+}

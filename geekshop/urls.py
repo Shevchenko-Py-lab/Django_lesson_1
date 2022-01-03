@@ -21,6 +21,7 @@ from .views import index, contacts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', index, name='index'),
     path('contacts/', contacts, name='contacts'),
 
@@ -29,6 +30,8 @@ urlpatterns = [
     path('auth/', include('authapp.urls', namespace='auth')),
 
     path('basket/', include('basketapp.urls', namespace='basket')),
+
+    path('admin_staff/', include('adminapp.urls', namespace='admin_staff')),
 ]
 
 if settings.DEBUG:
