@@ -143,6 +143,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "geekshop", "static"),
     os.path.join(BASE_DIR, "mainapp", "static"),
+    os.path.join(BASE_DIR, "ordersapp", "static"),
 )
 
 MEDIA_URL = '/media/'

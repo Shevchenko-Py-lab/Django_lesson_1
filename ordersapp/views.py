@@ -12,6 +12,10 @@ from ordersapp.forms import OrderItemForm
 from ordersapp.models import Order, OrderItem
 
 
+def is_ajax(self):
+    return self.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
+
+
 class OrderList(ListView):
     model = Order
 
@@ -39,7 +43,8 @@ class OrderCreate(CreateView):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
                     form.initial['price'] = basket_items[num].product.price
-                basket_items.delete()
+                    basket_items[num].delete()
+                # basket_items.delete()
             else:
                 formset = OrderFormSet()
 
@@ -89,7 +94,6 @@ class OrderUpdate(UpdateView):
         orderitems = context['orderitems']
 
         with transaction.atomic():
-            form.instance.user = self.request.user
             self.object = form.save()
             if orderitems.is_valid():
                 orderitems.instance = self.object
