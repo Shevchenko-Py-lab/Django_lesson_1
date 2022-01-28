@@ -83,11 +83,11 @@ html, body {
 .basket {
 	display: block;
 	width: 23px;
-	height: 23px;	
-	background-image: url(/static/geekshop/img/basket.png);
+	height: 23px;
 	position: absolute;
-	top: 63px;
+	top: 53px;
 	left: 1210px;
+	width: 140px;
 }
 
 .clearfix:after {

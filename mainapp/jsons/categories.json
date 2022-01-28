@@ -1,0 +1,22 @@
+[
+   {
+      "name": "Шкафы",
+      "description": "Тестовое описание"
+  },
+  {
+      "name": "Классика",
+      "description": ""
+    },
+  {
+      "name": "Модерн",
+      "description": ""
+  },
+  {
+      "name": "Офис",
+      "description": ""
+    },
+  {
+      "name": "Дом",
+      "description": ""
+    }
+]
