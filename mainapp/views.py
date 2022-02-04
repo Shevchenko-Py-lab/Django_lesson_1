@@ -1,3 +1,4 @@
+import os
 import random
 
 from django.shortcuts import render, get_object_or_404
@@ -83,3 +84,9 @@ def product(request, pk):
     }
 
     return render(request, 'mainapp/product_detail.html', context)
+
+
+# def load_from_json(file_name):
+#    with open(os.path.join(JSON_PATH, file_name + '.json'), 'r',\
+#              errors='ignore') as infile:
+#        return json.load(infile)
