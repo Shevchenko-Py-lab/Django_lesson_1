@@ -58,7 +58,7 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'template_profiler_panel',
-   # 'django_extensions',
+    'django_extensions',
 ]
 
 AUTH_USER_MODEL = 'authapp.ShopUser'
@@ -90,7 +90,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'mainapp.context_processors.basket',
-                'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
         },
