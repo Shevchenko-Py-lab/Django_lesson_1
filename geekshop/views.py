@@ -6,7 +6,7 @@ from mainapp.models import Product
 
 def index(request):
     title = 'Магазин GeekShop'
-    products = Product.objects.all()[:3]
+    products = Product.objects.filter(is_active=True, category__is_active=True).select_related('category')[:3]
     basket = []
     if request.user.is_authenticated:
         basket = Basket.objects.filter(user=request.user)
@@ -37,4 +37,3 @@ def contacts(request):
         'basket': basket,
     }
     return render(request, 'geekshop/contacts.html', context=context)
-
