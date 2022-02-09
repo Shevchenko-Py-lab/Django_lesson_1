@@ -1,3 +1,4 @@
+from django.db import connection
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render
@@ -6,6 +7,7 @@ from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
+from django.db.models import F
 
 
 from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, ProductEditForm
@@ -13,6 +15,7 @@ from authapp.forms import ShopUserRegisterForm
 
 from authapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
+from mainapp.views import db_profile_by_type
 
 
 class UsersListView(ListView):
@@ -155,6 +158,23 @@ class ProductCategoryUpdateView(CreateView):
     template_name = 'adminapp/category_update.html'
     success_url = reverse_lazy('admin_staff:categories')
     fields = '__all__'
+    form_class = ProductCategoryEditForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'категории/редактирование'
+        return context
+
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                self.object.product_set. \
+                    update(price=F('price') * (1 - discount / 100))
+                db_profile_by_type(self.__class__, 'UPDATE', \
+                                   connection.queries)
+
+        return super().form_valid(form)
 
 
 # @user_passes_test(lambda u: u.is_superuser)

@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.db.models import F
 
 from basketapp.models import Basket
 from mainapp.models import Product
@@ -11,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def basket(request):
     title = 'корзина'
-    basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
+    basket_items = Basket.objects.filter(user=request.user).order_by('product__category').select_related()
 
     context = {
         'title': title,
@@ -34,6 +35,13 @@ def basket_add(request, pk):
 
     basket.quantity += 1
     basket.save()
+    #
+    # old_basket_item = Basket.get_product(user=request.user, product=product)
+    # if old_basket_item:
+    #     old_basket_item[0].quantity += 1
+    #     old_basket_item[0].save()
+    # else:
+    #     old_basket_item[0].quantity = F('quantity') + 1
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
